@@ -1,0 +1,196 @@
+/*******************************************************************************
+ * 🎨 OVERRIDDEN CATPPUCCIN MOCHA i3 POWERMENU FOR ENDEAVOUROS
+ * Maintainer: joekamprad [joekamprad //a_t// endeavouros.com]
+ *******************************************************************************/
+
+configuration {
+    font:            "Noto Sans Regular 10";
+    show-icons:      false;
+    icon-theme:      "Qogir";
+    scroll-method:   0;
+    disable-history: false;
+    sidebar-mode:    false;
+}
+
+/* ------------------------------------------------------------------------------
+   🎨 DEFINE CATPPUCCIN MOCHA PALETTE VARIABLES
+   ------------------------------------------------------------------------------ */
+* {
+    /* Main Background Layers */
+    bg-base:             #11111B;  /* Mocha Base */
+    bg-mantle:           #1E1E2E;  /* Mocha Mantle */
+    bg-surface:          #313244;  /* Mocha Surface0 */
+    
+    /* Typography & Accents */
+    txt-main:            #CDD6F4;  /* Mocha Text */
+    accent-mauve:        #CBA6F7;  /* Mocha Mauve */
+    accent-blue:         #89B4FA;  /* Mocha Blue */
+    accent-red:          #F38BA8;  /* Mocha Red */
+
+    /* Override System Variables To Completely Kill the Peach Accent */
+    background:                  @bg-base;
+    foreground:                  @txt-main;
+    separatorcolor:              @bg-surface;
+    
+    normal-background:           @bg-base;
+    normal-foreground:           @txt-main;
+    
+    active-background:           @bg-surface;
+    active-foreground:           @accent-blue;
+    
+    urgent-background:           @bg-base;
+    urgent-foreground:           @accent-red;
+    
+    selected-normal-background:  @bg-surface;
+    selected-normal-foreground:  @accent-blue;     /* Changes selected action text to Blue */
+    
+    selected-active-background:  @accent-mauve;
+    selected-active-foreground:  @bg-base;
+    
+    selected-urgent-background:  @accent-red;
+    selected-urgent-foreground:  @bg-base;
+    
+    alternate-normal-background: @bg-base;
+    alternate-normal-foreground: @txt-main;
+    
+    alternate-active-background: @bg-base;
+    alternate-active-foreground: @accent-blue;
+    
+    alternate-urgent-background: @bg-base;
+    alternate-urgent-foreground: @accent-red;
+}
+
+/* ------------------------------------------------------------------------------
+   📐 WINDOW & STRUCTURE (Positioned on the Right Side)
+   ------------------------------------------------------------------------------ */
+window {
+    background-color: @background;
+    border:           3px;
+    border-color:     @accent-blue;    /* Clean blue frame line */
+    border-radius:    10px;
+    padding:          15px;
+    transparency:     "real";
+    width:            140px;           /* Widened slightly to keep text safe from clipping */
+    location:         east;
+}
+
+/* Removes the text input line, keeping only the choice elements */
+mainbox {
+    children: [ listview ];
+    background-color: transparent;
+}
+
+/* ------------------------------------------------------------------------------
+   📋 LIST VIEW & ELEMENTS
+   ------------------------------------------------------------------------------ */
+listview {
+    fixed-height:     0;
+    lines:            7;
+    columns:          1;
+    scrollbar:        false;
+    background-color: transparent;
+    spacing:          4px;
+}
+
+element {
+    border:        0;
+    padding:       6px 10px;           /* Balanced padding for power elements */
+    border-radius: 6px;                /* Matching curved hover rows */
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+/* ------------------------------------------------------------------------------
+   🎛️ SYSTEM CORES (Applies background overrides to the rendering rules)
+   ------------------------------------------------------------------------------ */
+element.normal.normal {
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
+}
+element.normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
+}
+element.normal.active {
+    background-color: @active-background;
+    text-color:       @active-foreground;
+}
+element.selected.normal {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+element.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @selected-urgent-foreground;
+}
+element.selected.active {
+    background-color: @selected-active-background;
+    text-color:       @selected-active-foreground;
+}
+element.alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color:       @alternate-normal-foreground;
+}
+element.alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color:       @alternate-urgent-foreground;
+}
+element.alternate.active {
+    background-color: @alternate-active-background;
+    text-color:       @alternate-active-foreground;
+}
+
+scrollbar {
+    width:        0px;                 /* Force disabled */
+    border:       0;
+}
+
+mode-switcher {
+    border:       2px 0px 0px;
+    border-color: @separatorcolor;
+}
+
+button {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+
+button.selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+
+inputbar {
+    spacing:    0;
+    text-color: @normal-foreground;
+    padding:    1px;
+}
+
+case-indicator {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+
+entry {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+
+prompt {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+
+inputbar {
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+
+textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em;
+    text-color: @normal-foreground;
+}

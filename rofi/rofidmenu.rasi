@@ -1,0 +1,196 @@
+/*******************************************************************************
+ * 🎨 OVERRIDDEN CATPPUCCIN MOCHA LAUNCHER FOR ENDEAVOUROS
+ * Maintainer: joekamprad [joekamprad //a_t// endeavouros.com]
+ *******************************************************************************/
+
+configuration {
+    font:                "Noto Sans Regular 10";
+    show-icons:          true;
+    icon-theme:          "Qogir";
+    display-drun:        "Apps";
+    drun-display-format: "{name}";
+    scroll-method:       0;
+    disable-history:     false;
+    sidebar-mode:        false;
+}
+
+/* ------------------------------------------------------------------------------
+   🎨 DEFINE CATPPUCCIN MOCHA PALETTE VARIABLES
+   ------------------------------------------------------------------------------ */
+* {
+    /* Main Background Layers */
+    bg-base:             #11111B;  /* Mocha Base */
+    bg-mantle:           #1E1E2E;  /* Mocha Mantle */
+    bg-surface:          #313244;  /* Mocha Surface0 */
+    
+    /* Typography & Accents */
+    txt-main:            #CDD6F4;  /* Mocha Text */
+    accent-mauve:        #CBA6F7;  /* Mocha Mauve */
+    accent-blue:         #89B4FA;  /* Mocha Blue */
+    accent-red:          #F38BA8;  /* Mocha Red */
+
+    /* Override System Variables To Completely Kill the Peach Accent */
+    background:                  @bg-base;
+    foreground:                  @txt-main;
+    separatorcolor:              @bg-surface;
+    
+    normal-background:           @bg-base;
+    normal-foreground:           @txt-main;
+    
+    active-background:           @bg-surface;
+    active-foreground:           @accent-blue;
+    
+    urgent-background:           @bg-base;
+    urgent-foreground:           @accent-red;
+    
+    selected-normal-background:  @bg-surface;
+    selected-normal-foreground:  @accent-blue;     /* Changes selected item text to Blue */
+    
+    selected-active-background:  @accent-mauve;
+    selected-active-foreground:  @bg-base;
+    
+    selected-urgent-background:  @accent-red;
+    selected-urgent-foreground:  @bg-base;
+    
+    alternate-normal-background: @bg-base;
+    alternate-normal-foreground: @txt-main;
+    
+    alternate-active-background: @bg-base;
+    alternate-active-foreground: @accent-blue;
+    
+    alternate-urgent-background: @bg-base;
+    alternate-urgent-foreground: @accent-red;
+}
+
+/* ------------------------------------------------------------------------------
+   📐 WINDOW & STRUCTURE
+   ------------------------------------------------------------------------------ */
+window {
+    background-color: @background;
+    border:           3px;
+    border-color:     @accent-blue;    /* Clean blue border around the window */
+    border-radius:    10px;
+    padding:          25px;
+}
+
+mainbox {
+    border:  0;
+    padding: 0;
+}
+
+message {
+    border:       2px 0px 0px;
+    border-color: @separatorcolor;
+    padding:      1px;
+}
+
+textbox {
+    text-color: @foreground;
+}
+
+/* ------------------------------------------------------------------------------
+   📋 LIST VIEW CONFIGURATION (Grid layout spacing)
+   ------------------------------------------------------------------------------ */
+listview {
+    fixed-height: 0;
+    border:       2px 0px 0px;     /* Subtle separator line above apps list */
+    border-color: @separatorcolor;
+    spacing:      8px;
+    scrollbar:    false;
+    padding:      10px 0px 0px;
+    lines:        10;
+    columns:      3;
+}
+
+element {
+    border:        0;
+    padding:       6px 10px;       /* Extra padding for app elements */
+    border-radius: 6px;            /* Clean curved selection boxes */
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+/* ------------------------------------------------------------------------------
+   🎛️ SYSTEM CORES (Enforces layout configurations onto the theme engine)
+   ------------------------------------------------------------------------------ */
+element.normal.normal {
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
+}
+element.normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
+}
+element.normal.active {
+    background-color: @active-background;
+    text-color:       @active-foreground;
+}
+element.selected.normal {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+element.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @selected-urgent-foreground;
+}
+element.selected.active {
+    background-color: @selected-active-background;
+    text-color:       @selected-active-foreground;
+}
+element.alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color:       @alternate-normal-foreground;
+}
+element.alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color:       @alternate-urgent-foreground;
+}
+element.alternate.active {
+    background-color: @alternate-active-background;
+    text-color:       @alternate-active-foreground;
+}
+
+/* ------------------------------------------------------------------------------
+   🔍 INPUT SEARCH BAR
+   ------------------------------------------------------------------------------ */
+inputbar {
+    spacing:      0;
+    text-color:   @accent-mauve;   /* Changes search font indicator to Mauve */
+    padding:      0px 0px 10px;
+}
+
+entry {
+    spacing:      0;
+    text-color:   @foreground;
+}
+
+prompt {
+    spacing:      0;
+    text-color:   @accent-mauve;
+    font:         "Noto Sans Bold 10";
+}
+
+textbox-prompt-colon {
+    expand:       false;
+    str:          ":";
+    margin:       0px 0.5em 0em 0em;
+    text-color:   @accent-mauve;
+}
+
+mode-switcher {
+    border:       2px 0px 0px;
+    border-color: @separatorcolor;
+}
+
+button {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+
+button.selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
