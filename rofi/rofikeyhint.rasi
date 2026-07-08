@@ -1,0 +1,31 @@
+@import "config.rasi"
+
+window {
+    padding:            20px;
+}
+
+listview {
+    lines:              10;
+    columns:            1;
+    spacing:            2px;
+    padding:            0;
+}
+
+element {
+    padding:           6px 12px;
+    border-radius:     6px;
+}
+
+element selected.normal {
+    background-color:   @bg-surface0;
+    text-color:         @accent-mauve;
+}
+
+inputbar {
+    padding:            0 0 8px 0;
+}
+
+scrollbar {
+    width:              4px;
+    handle-width:       4px;
+}

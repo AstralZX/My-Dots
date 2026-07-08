@@ -1,0 +1,38 @@
+@import "config.rasi"
+
+window {
+    width:              160px;
+    padding:            12px;
+    location:           east;
+}
+
+mainbox {
+    children:           [ listview ];
+}
+
+listview {
+    lines:              7;
+    spacing:            2px;
+    padding:            0;
+}
+
+element {
+    padding:           10px 12px;
+    border-radius:     8px;
+}
+
+inputbar {
+    padding:            0;
+}
+
+entry {
+    padding:            0;
+}
+
+prompt {
+    padding:            0;
+}
+
+button {
+    padding:            6px 12px;
+}

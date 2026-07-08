@@ -1,0 +1,197 @@
+* {
+    /* Monochrome Greyscale */
+    bg-base:             #0A0A0A;
+    bg-mantle:           #111111;
+    bg-surface0:         #1C1C1E;
+    bg-surface1:         #2C2C2E;
+    bg-overlay0:         #3A3A3C;
+    txt-main:            #F5F5F5;
+    txt-sub:             #AEAEB2;
+    txt-overlay:         #636366;
+    accent-mauve:        #FFFFFF;
+    accent:              #FFFFFF;
+
+    /* Derived */
+    background:          @bg-base;
+    foreground:          @txt-main;
+    separatorcolor:      @bg-surface0;
+
+    normal-background:           transparent;
+    normal-foreground:           @txt-main;
+    active-background:           @bg-surface0;
+    active-foreground:           @txt-main;
+    urgent-background:           transparent;
+    urgent-foreground:           @txt-overlay;
+    selected-normal-background:  @bg-surface0;
+    selected-normal-foreground:  @accent;
+    selected-active-background:  @bg-surface1;
+    selected-active-foreground:  @accent;
+    selected-urgent-background:  @bg-surface1;
+    selected-urgent-foreground:  @txt-sub;
+    alternate-normal-background: transparent;
+    alternate-normal-foreground: @txt-main;
+    alternate-active-background: @bg-surface0;
+    alternate-active-foreground: @txt-main;
+    alternate-urgent-background: transparent;
+    alternate-urgent-foreground: @txt-overlay;
+
+    /* Global */
+    background-color:    transparent;
+    text-color:          @foreground;
+    font:                "JetBrainsMono Nerd Font 11";
+}
+
+window {
+    width:              680px;
+    height:             460px;
+    border-radius:      12px;
+    border:             1px;
+    border-color:       @bg-surface1;
+    background-color:   @bg-mantle;
+    padding:            16px;
+    transparency:       "real";
+    location:           center;
+}
+
+mainbox {
+    background-color:   transparent;
+    padding:            0;
+    children:           [ inputbar, listview, mode-switcher ];
+}
+
+inputbar {
+    background-color:   transparent;
+    spacing:            0;
+    padding:            0 0 12px 0;
+    children:           [ prompt, entry ];
+}
+
+prompt {
+    background-color:   @bg-surface1;
+    text-color:         @txt-main;
+    font:               "JetBrainsMono Nerd Font 11";
+    padding:            8px 14px;
+    border-radius:      10px 0 0 10px;
+    margin:             0;
+    str:                "  ";
+}
+
+entry {
+    background-color:   @bg-surface0;
+    text-color:         @txt-main;
+    placeholder:        "Search...";
+    placeholder-color:  @txt-overlay;
+    padding:            8px 14px;
+    border-radius:      0 10px 10px 0;
+    margin:             0;
+    expand:             true;
+}
+
+listview {
+    background-color:   transparent;
+    columns:            1;
+    lines:              8;
+    cycle:              true;
+    dynamic:            true;
+    padding:            4px 0;
+    spacing:            2px;
+    scrollbar:          false;
+    fixed-height:       0;
+}
+
+element {
+    background-color:   transparent;
+    text-color:         @txt-main;
+    padding:            8px 12px;
+    border-radius:      8px;
+    margin:             1px 0;
+}
+
+element-icon {
+    size:              28px;
+    margin:            0 12px 0 0;
+}
+
+element-text {
+    vertical-align:    0.5;
+    text-color:        inherit;
+}
+
+element selected.normal {
+    background-color:   @bg-surface0;
+    text-color:         @accent;
+}
+
+element selected.active {
+    background-color:   @bg-surface1;
+    text-color:         @accent;
+}
+
+element selected.urgent {
+    background-color:   @bg-surface1;
+    text-color:         @txt-sub;
+}
+
+element normal.normal {
+    background-color:   transparent;
+    text-color:         @txt-main;
+}
+
+element normal.active {
+    background-color:   transparent;
+    text-color:         @txt-main;
+}
+
+element normal.urgent {
+    background-color:   transparent;
+    text-color:         @txt-overlay;
+}
+
+element alternate.normal {
+    background-color:   transparent;
+    text-color:         @txt-main;
+}
+
+mode-switcher {
+    background-color:   transparent;
+    spacing:            6px;
+    padding:            12px 0 0 0;
+    border:             1px 0 0 0;
+    border-color:       @bg-surface0;
+}
+
+button {
+    padding:            6px 16px;
+    background-color:   transparent;
+    text-color:         @txt-sub;
+    border-radius:      8px;
+    vertical-align:     0.5;
+    horizontal-align:   0.5;
+}
+
+button selected {
+    background-color:   @bg-surface0;
+    text-color:         @accent;
+}
+
+scrollbar {
+    width:              4px;
+    border:             0;
+    handle-width:       4px;
+    handle-color:       @bg-overlay0;
+    padding:            0;
+    margin:             0;
+    border-radius:      2px;
+}
+
+configuration {
+    terminal:           "kitty";
+    font:               "JetBrainsMono Nerd Font 11";
+    show-icons:         true;
+    icon-theme:         "YAMIS";
+    drun-display-format: "{name}";
+    display-drun:       "Apps";
+    disable-history:    false;
+    sidebar-mode:       false;
+    sort:               false;
+}

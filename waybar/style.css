@@ -1,0 +1,84 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Inter", "SF Pro Display", "Noto Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+window#waybar > box {
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+#custom-left-pill,
+#custom-peachwm-window,
+#custom-center-left,
+#custom-spotify,
+#custom-center-right,
+#custom-right-pill,
+#custom-power {
+  background: rgba(17, 17, 17, 0.87);
+  border-radius: 14px;
+  color: #D8D8D8;
+  font-size: 12px;
+  padding: 0 10px;
+  margin: 0 5px;
+}
+
+#custom-left-pill {
+  padding: 0 14px;
+  margin-left: 0;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}
+
+#custom-peachwm-window {
+  padding: 0 4px;
+  font-size: 13px;
+}
+
+#custom-center-left {
+  min-width: 60px;
+  font-size: 14px;
+  padding: 0;
+  color: #BEBEBE;
+}
+
+#custom-spotify {
+  padding: 0 16px;
+  font-size: 12px;
+}
+
+#custom-center-right {
+  min-width: 60px;
+  font-size: 14px;
+  padding: 0;
+  color: #BEBEBE;
+}
+
+#custom-right-pill {
+  padding: 0 14px;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+}
+
+#custom-power {
+  min-width: 28px;
+  font-size: 15px;
+  padding: 0;
+  margin-right: 0;
+  color: #BEBEBE;
+}
+
+#custom-power:hover {
+  color: #ffffff;
+}

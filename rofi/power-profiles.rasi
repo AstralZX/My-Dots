@@ -1,0 +1,43 @@
+@import "config.rasi"
+
+window {
+    width:              240px;
+    padding:            12px;
+    location:           east;
+}
+
+mainbox {
+    children:           [ message, listview ];
+}
+
+message {
+    font:               "JetBrainsMono Nerd Font 10";
+    text-color:         @accent-mauve;
+    margin:             0 0 10px 0;
+    padding:            6px 10px;
+    background-color:   @bg-surface0;
+    border-radius:      8px;
+}
+
+listview {
+    lines:              4;
+    spacing:            2px;
+    padding:            0;
+}
+
+element {
+    padding:           10px 12px;
+    border-radius:     8px;
+}
+
+inputbar {
+    padding:            0;
+}
+
+entry {
+    padding:            0;
+}
+
+prompt {
+    padding:            0;
+}

@@ -1,0 +1,84 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+
+  "spacing": 0,
+  "margin-top": 8,
+  "margin-bottom": 0,
+  "margin-left": 10,
+  "margin-right": 10,
+
+  "modules-left": [
+    "custom/left-pill",
+    "custom/peachwm-window"
+  ],
+
+  "modules-center": [
+    "custom/center-left",
+    "custom/spotify",
+    "custom/center-right"
+  ],
+
+  "modules-right": [
+    "custom/right-pill",
+    "custom/power"
+  ],
+
+  "custom/peachwm-window": {
+    "exec": "$HOME/.config/waybar/scripts/peachwm-window.sh",
+    "interval": 0.5,
+    "return-type": "json",
+    "tooltip": true
+  },
+
+  "custom/left-pill": {
+    "exec": "$HOME/.config/waybar/scripts/left-pill.sh",
+    "interval": 5,
+    "return-type": "json",
+    "markup": "pango",
+    "tooltip": false
+  },
+
+  "custom/center-left": {
+    "exec": "$HOME/.config/waybar/scripts/center-left.sh",
+    "interval": 86400,
+    "return-type": "json",
+    "markup": "pango",
+    "tooltip": false
+  },
+
+  "custom/spotify": {
+    "exec": "$HOME/.config/waybar/scripts/spotify.sh",
+    "interval": 2,
+    "tooltip": false,
+    "on-click": "playerctl -p spotify play-pause",
+    "on-scroll-up": "playerctl -p spotify next",
+    "on-scroll-down": "playerctl -p spotify previous"
+  },
+
+  "custom/center-right": {
+    "exec": "$HOME/.config/waybar/scripts/center-right.sh",
+    "interval": 86400,
+    "return-type": "json",
+    "markup": "pango",
+    "tooltip": false
+  },
+
+  "custom/right-pill": {
+    "exec": "$HOME/.config/waybar/scripts/right-pill.sh",
+    "interval": 5,
+    "return-type": "json",
+    "markup": "pango",
+    "tooltip": false
+  },
+
+  "custom/power": {
+    "exec": "$HOME/.config/waybar/scripts/power.sh",
+    "interval": 86400,
+    "return-type": "json",
+    "markup": "pango",
+    "tooltip": false,
+    "on-click": "rofi -show powermenu -config ~/.config/rofi/powermenu.rasi"
+  }
+}
