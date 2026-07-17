@@ -84,4 +84,4 @@ export VISUAL='zed'
 
 pfetch
 
-export PATH=$PATH:/home/perfect/.spicetify
+export PATH=$PATH:~/.spicetify

@@ -131,7 +131,7 @@ autostart = {
     "systemctl --user import-environment WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_CURRENT_DESKTOP",
     "waybar",
     "mako",
-    "mpvpaper -o 'no-audio --loop-playlist' ALL /home/perfect/Pictures/AnimeTuff.mp4 &",
+    "mpvpaper -o 'no-audio --loop-playlist' ALL ~/Pictures/wallpaper.mp4 &",
     "systemctl --user stop xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk 2>/dev/null",
     "systemctl --user daemon-reload",
     "systemctl --user start xdg-desktop-portal",
@@ -162,7 +162,7 @@ keybinds = {
     { mods = { "logo", "shift" }, key = "e",       action = "quit" },
     { mods = { "logo" },          key = "`",       action = "togglescratchpad" },
     { mods = { "logo", "shift" }, key = "~",       action = "swapdirscratchpad" },
-    { mods = { "logo" },          key = "p",       action = "spawn",             args = { "python", "/home/perfect/.local/bin/selector.py" } },
+    { mods = { "logo" },          key = "p",       action = "spawn",             args = { "python", os.getenv("HOME") .. "/.local/bin/selector.py" } },
     { mods = { "logo" },          key = "s",       action = "spawn",             args = { "flameshot", "gui" } },
     { mods = { "logo", "shift" }, key = "s",       action = "spawn",             args = { "flameshot", "full" } },
 }
