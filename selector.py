@@ -32,10 +32,10 @@ def kill_mpvpaper():
 def set_mpvpaper_wallpaper(file_path):
     """Cambia el wallpaper (estático o dinámico) usando mpvpaper"""
     kill_mpvpaper()
-
-    # Ejecuta mpvpaper sin audio y en bucle continuo para todas las pantallas (ALL)
+    
+    # Pasamos las opciones de mpv de forma segura
     cmd = ["mpvpaper", "-o", "no-audio --loop-playlist", "ALL", file_path]
-
+    
     proc = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     with open(MPVPAPER_PID_FILE, "w") as f:
         f.write(str(proc.pid))
@@ -46,7 +46,7 @@ class RoundedImage(QLabel):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.radius = 22
-
+        
     def setPixmap(self, pixmap):
         if not pixmap: return
         size = self.size()
@@ -73,7 +73,7 @@ class WallpaperItem(QFrame):
         self.img_label.setGeometry(10, 10, 290, 200)
         self.blur_effect = QGraphicsBlurEffect(self)
         self.img_label.setGraphicsEffect(self.blur_effect)
-
+        
     def set_blur(self, r): self.blur_effect.setBlurRadius(min(r, 10))
     def mousePressEvent(self, e): self.clicked.emit(self.path)
 
@@ -83,12 +83,22 @@ class WallpaperCarousel(QWidget):
         self.wallpaper_dir = WALLPAPER_DIR
         self.thumb_dir = os.path.join(self.wallpaper_dir, '.thumbnails')
 
-        # Cargar archivos multimedia que coincidan con imágenes o videos soportados
+        # Cargar archivos multimedia válidos
         self.base_wps = sorted([
             os.path.join(self.wallpaper_dir, f)
             for f in os.listdir(self.wallpaper_dir)
             if f.lower().endswith(VALID_EXTENSIONS)
         ])
+        
+        # FIX: Duplicar dinámicamente si tienes pocas imágenes para que no se rompa el scroll
+        self.display_multiplier = 3
+        if len(self.base_wps) == 1:
+            self.display_multiplier = 12
+        elif len(self.base_wps) == 2:
+            self.display_multiplier = 6
+        elif len(self.base_wps) == 3:
+            self.display_multiplier = 4
+
         self.items = []
         self._bg_opacity = 70
         self.initUI()
@@ -129,10 +139,12 @@ class WallpaperCarousel(QWidget):
 
         self.container = QWidget()
         self.container.setFixedHeight(280)
-        self.container.setFixedWidth(len(self.base_wps * 3) * 350 + 200)
+        
+        total_items = len(self.base_wps * self.display_multiplier)
+        self.container.setFixedWidth(total_items * 350 + 200)
 
         x = 20
-        for wp in self.base_wps * 3:
+        for wp in self.base_wps * self.display_multiplier:
             item = WallpaperItem(wp, self.container)
             item.move(x, 30)
             item.img_label.setPixmap(QPixmap(self.get_thumbnail(wp)))
@@ -146,18 +158,16 @@ class WallpaperCarousel(QWidget):
         """Genera miniaturas estáticas tanto para imágenes normales como fotogramas de video"""
         vn = os.path.basename(file_path)
         tp = os.path.join(self.thumb_dir, vn + ".thumb.jpg")
-
+        
         if not os.path.exists(tp):
-            if not os.path.exists(self.thumb_dir):
+            if not os.path.exists(self.thumb_dir): 
                 os.makedirs(self.thumb_dir)
-
-            # Si el archivo es un video, usamos ffmpeg para tomar una captura al segundo 2
+            
             if file_path.lower().endswith(VIDEO_EXTENSIONS):
-                subprocess.run(['ffmpeg', '-ss', '00:00:02', '-i', file_path,
-                                '-vf', 'scale=300:-1', '-vframes', '1', tp, '-y'],
+                subprocess.run(['ffmpeg', '-ss', '00:00:02', '-i', file_path, 
+                                '-vf', 'scale=300:-1', '-vframes', '1', tp, '-y'], 
                                 capture_output=True)
             else:
-                # Si es una imagen normal, la redimensionamos rápidamente usando Pillow
                 try:
                     from PIL import Image
                     img = Image.open(file_path)
@@ -174,8 +184,9 @@ class WallpaperCarousel(QWidget):
         self.close()
 
     def reset_to_center(self):
-        if self.base_wps:
-            self.scroll.horizontalScrollBar().setValue(len(self.base_wps)*350)
+        if self.base_wps: 
+            center_factor = self.display_multiplier // 3
+            self.scroll.horizontalScrollBar().setValue(len(self.base_wps) * center_factor * 350)
 
     def wheelEvent(self, e):
         self.anim_scroll.stop()
@@ -189,10 +200,15 @@ class WallpaperCarousel(QWidget):
     def update_logic(self):
         self.current_velocity *= 0.9
         for i in self.items: i.set_blur(self.current_velocity)
-        v, lim = self.scroll.horizontalScrollBar().value(), len(self.base_wps)*350
+        
+        v = self.scroll.horizontalScrollBar().value()
+        lim = len(self.base_wps) * 350
+        
         if lim > 0:
-            if v >= lim*2: self.scroll.horizontalScrollBar().setValue(v-lim)
-            elif v <= 350: self.scroll.horizontalScrollBar().setValue(v+lim)
+            if v >= lim * (self.display_multiplier - 2): 
+                self.scroll.horizontalScrollBar().setValue(v - lim)
+            elif v <= 350: 
+                self.scroll.horizontalScrollBar().setValue(v + lim)
 
     def keyPressEvent(self, e):
         if e.key() == Qt.Key.Key_Escape: self.close()
